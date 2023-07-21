@@ -107,15 +107,16 @@ public class HolidayMapper {
         //Get holiday list
         List<HolidayInformationEntity> holidayEntityList = CsvUtils.getHolidayEntityList();
 
-        //遍历list，获取指定country code下的指定年份下的所有的假期信息，并判断是否有重复的假期信息，如果有则不插入，并打印出来，如果没有则插入
+        List<HolidayInformationEntity> newHolidayEntityList = new ArrayList<HolidayInformationEntity>();
+        //遍历list,将不符合条件的数据放入新的list中
         for (HolidayInformationEntity holidayInformationEntity : holidayEntityList) {
-            if (holidayInformationEntity.getId().equals(id)) {
-                holidayEntityList.remove(holidayInformationEntity);
+            if (!holidayInformationEntity.getId().equals(id)) {
+                newHolidayEntityList.add(holidayInformationEntity);
             }
         }
 
         //将list中的数据写入CSV文件中
-        CsvUtils.writeHolidayEntityList(holidayEntityList);
+        CsvUtils.writeHolidayEntityList(newHolidayEntityList);
     }
 
 }

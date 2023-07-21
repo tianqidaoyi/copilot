@@ -22,10 +22,8 @@ public class HolidayController {
     //插入一条或多条假期信息
     @PostMapping("/holiday/add")
     public String insertHolidayInfo(@RequestBody List<HolidayInformationEntity> list) {
-
         //Use holidayService to insert holiday info
         holidayService.insertHolidayInfo(list);
-
         return "insert holiday info";
     }
 
